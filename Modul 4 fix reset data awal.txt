@@ -1,0 +1,253 @@
+#include <iostream>
+#include <conio.h>
+#include <stdio.h>
+#include <stdlib.h>
+
+using namespace std;
+
+struct perpus{
+	
+	string nmbk;
+	string nama;
+	string alamat;
+	int kodebk;
+
+	
+};
+perpus data[100];
+struct perpus temp;
+int data1=0,i,cari,j,pil1,m;
+char ya;
+bool ketemu;
+
+
+
+int quick(int kiri, int kanan){
+
+int pivot;
+		
+		if (kiri<kanan){
+		i = kiri;
+		j = kanan;
+		pivot=data[j].kodebk;
+	do{
+		while (i<j &&data[i].kodebk<=pivot){
+		i++;
+		}
+		while (j>i && data[j].kodebk>=pivot){
+		j--;
+		}
+		if (i<j){
+
+  		temp=data[i];
+  		data[i]=data[j];
+  		data[j]=temp;
+	}
+}while (i<j);
+
+		temp =data[j];
+		data[j]=data[kanan];
+		data[kanan]=temp;
+	
+	if (j-kiri<kanan-i){
+
+		quick(kiri,j-1);
+		quick(i+1,kanan);
+	}else{
+		quick(i+1,kanan);
+		quick(kiri,j-1);
+		}
+	}
+}
+int main(){
+	perpus copy[100];
+	int pil,bts=10;
+	cout<<"(WARNING MAX TEMPAT 100)"<<endl;
+	cout<<"ßßßßßßßßßßßßßßßßßßßßßßßß"<<endl;
+	
+	
+	
+	
+do{
+	system("cls");
+	cout<<"ßßßßßßßßßßßßßßßßßßßßßßßßßßßßßßßßßßßßßßßßßßßßßßßßßßßßßßßßßßßßßßßßßßßß"<<endl;
+	printf("%-12s %-20s %-15s %-10s\n", "Kode Buku", "Nama Buku", "\tNama", "Alamat");
+	cout<<"ßßßßßßßßßßßßßßßßßßßßßßßßßßßßßßßßßßßßßßßßßßßßßßßßßßßßßßßßßßßßßßßßßßßß"<<endl;
+	for(int y=0;y<data1;y++){
+		cout<<data[y].kodebk<<"\t|\t"<<data[y].nmbk<<"\t|\t\t"<<data[y].nama<<"\t|\t"<<data[y].alamat<<endl;
+	}
+	  	
+	  
+		
+
+		cout<<"1.insert\n2.delete\n3.mencari data\n4.sorting\n5.restart data awal\npilih :";
+		cin>>pil;
+		switch(pil){
+			case 1:
+				if(data1<1&&data1<bts){
+					i=0;
+				}else{
+					i=data1;
+				}
+				if(data1<bts){
+					do{
+						cout<<"ßßßßßßßßßßßßßßßßßßßß"<<endl;
+						cout<<"kode buku         :";
+						cin>>data[i].kodebk;
+						copy[i].kodebk=data[i].kodebk;
+					 cout<<"Masukan Nama buku   :";
+						cin>>data[i].nmbk;
+						copy[i].nmbk=data[i].nmbk;
+						cout<<"Masukan Nama anda   :";
+						cin>>data[i].nama;
+						copy[i].nama=data[i].nama;
+						cout<<"Masukan alamat anda :";
+						cin>>data[i].alamat;
+						copy[i].alamat=data[i].alamat;
+						i++;
+						cout<<"\n";
+						if(i==bts){
+							i++;
+						}else{
+							
+							ya=_getch();
+							cout<<"\n";
+						}
+						data1++;
+					}while(i<bts&&ya=='y');
+				}else{
+					cout<<"ruang batas penuh";
+				}
+				break;
+					
+					case 2:
+					if(data1<1){
+					cout<<"data koong";
+				}else{
+						
+						cout<<"kode Buku :";
+			    	 	cin>>cari;
+			    	 for(int h=0;h<=data1;h++){
+			    	 	if(cari==data[h].kodebk){
+			    	 		ketemu=true;
+			    	 		if(ketemu){
+    				for(j=h;j<=data1+1;j++){
+    					data[j]=data[j+1];
+					}
+     				cout<<"Data yang anda cari di hapus"<<endl;
+					data1--;
+    				}
+   				}
+  			}	
+  			
+  			system("pause");
+		}
+		break;
+					case 3:
+						if(data1<1){
+							cout<<"data koong";
+						}else{
+				
+					cout<<"Kode Buku :"<<endl;
+					cin>>cari;
+					
+				for(int ot=0;ot<=data1;ot++){
+					if(cari==data[ot].kodebk){
+						ketemu=true;
+					if(ketemu){
+    						cout<<"data ketemu "<<endl;
+    						cout<<"ßßßßßßßßßßßßßßßßßßßß"<<endl;
+							cout<<"kode buku   :"<<data[ot].kodebk<<endl;
+							cout<<"Nama buku   :"<<data[ot].nmbk<<endl;
+							cout<<"Nama        :"<<data[ot].nama<<endl;
+							cout<<"Alamat      :"<<data[ot].alamat<<endl;
+     				}
+     				
+			 		
+     			}
+			}
+			
+		
+		}
+		
+		system("pause");
+		break;
+				case 4:
+					cout<<"1.Quick sort"<<endl;
+					cout<<"2.Buble Sort"<<endl;
+					cout<<"Pilih :";
+					cin>>pil1;
+					
+			do{
+			
+					switch(pil1){
+					case 1:
+						if(data1<0){
+							cout<"data kosong";
+						}else{
+									quick(0,data1-1);
+				cout<<"Data sudah tersorting"<<endl;	
+						}break;
+						
+					case 2:
+						if(data1<0){
+							cout<<"data kosong";
+							
+						}else{
+							for(int y=0;y<=data1-2;y++){
+                        	
+                				for(int o=0;o<=data1-2-y;o++){
+                        if(data[o].kodebk >data[o+1].kodebk){
+                          
+						    temp=data[o];
+                        	data[o]=data[o+1];
+                            data[o+1]=temp;
+
+						}
+					}
+				}
+			}
+			
+		}
+		ya=_getch();
+}while(ya=='y');
+		break;
+					case 5:
+						
+						if(data1<0){
+							cout<<"data kosong"<<endl;
+						}else{
+			for(int hi=0;hi<data1;hi++){
+                data[hi].kodebk=copy[hi].kodebk;
+                data[hi].nmbk=copy[hi].nmbk;
+               	data[hi].nama=copy[hi].nama;
+                data[hi].alamat=copy[hi].alamat;
+						}
+					cout<<" data berhasil di reset "<<endl;
+            }
+            
+	break;
+
+		
+	}
+}while(pil<6);
+}
+/*system("cls");
+					if(data1<1){
+						
+						cout<<"data koosong"<<endl;
+					}else{
+						
+					for(int y=0;y<data1;y++){
+					
+							cout<<"ßßßßßßßßßßßßßßßßßßßß"<<endl;
+							cout<<"kode buku   :"<<data[y].kodebk<<endl;
+							cout<<"Nama buku   :"<<data[y].nmbk<<endl;
+							cout<<"Nama        :"<<data[y].nama<<endl;
+							cout<<"Alamat      :"<<data[y].alamat<<endl;
+						
+						}
+					}
+					system("pause");
+					break;*/
+
